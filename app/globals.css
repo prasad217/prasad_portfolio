@@ -2,20 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Background Animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-gradientMove {
+  animation: gradientMove 10s ease infinite;
+  background-size: 200% 200%;
+  background-image: linear-gradient(to right, #6a0dad, #4c51bf, #4299e1, #f4d03f);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/* Keyframe for Gradient Text Animation */
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Tailwind CSS Custom Utility */
+.animate-gradientText {
+  animation: gradientText 5s ease infinite;
+  background-size: 300% 300%;
+}
+/* Keyframe for Gradient Text Animation */
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom Utility for Animated Gradient Text */
+.animate-gradientText {
+  animation: gradientText 5s ease infinite;
+  background-size: 300% 300%;
+}
+/* globals.css */
+#projects {
+  padding-top: 4rem; /* Adjust as needed */
+  padding-bottom: 4rem; /* Adjust as needed */
+}
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures button is at the bottom */
+  min-height: 300px; /* Adjust height for better layout */
 }

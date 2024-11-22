@@ -1,101 +1,143 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import About from './components/About';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const words = ['Student', 'Developer', 'Designer'];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isSwapped, setIsSwapped] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  // Typing animation logic
+  useEffect(() => {
+    let typingTimeout;
+
+    if (isDeleting) {
+      typingTimeout = setTimeout(() => {
+        setDisplayText((prev) => prev.slice(0, -1));
+      }, 50);
+    } else {
+      typingTimeout = setTimeout(() => {
+        setDisplayText((prev) =>
+          words[currentWordIndex].slice(0, prev.length + 1)
+        );
+      }, 100);
+    }
+
+    if (!isDeleting && displayText === words[currentWordIndex]) {
+      setTimeout(() => setIsDeleting(true), 800);
+    } else if (isDeleting && displayText === '') {
+      setIsDeleting(false);
+      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }
+
+    return () => clearTimeout(typingTimeout);
+  }, [displayText, isDeleting, currentWordIndex, words]);
+
+  // Color swapping logic for "I am"
+  useEffect(() => {
+    const colorSwapInterval = setInterval(() => {
+      setIsSwapped((prev) => !prev);
+    }, 4000);
+    return () => clearInterval(colorSwapInterval);
+  }, []);
+
+  return (
+    <div className="relative bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-500 animate-gradientMove">
+      {/* Home Section */}
+      <div
+        id="home"
+        className="h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-10"
+      >
+        <motion.div
+          className="text-center md:text-left md:w-1/2"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="text-4xl font-bold text-gray-200 mb-4">Hello,</p>
+          <h1 className="text-5xl md:text-8xl font-extrabold mb-6">
+            <span className={isSwapped ? 'text-orange-500' : 'text-white'}>I am</span>{' '}
+            <span className={isSwapped ? 'text-white' : 'text-orange-500'}>
+              Prasada Mekala
+            </span>
+          </h1>
+          <div
+            className="text-4xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent animate-gradientText"
+            style={{
+              backgroundImage:
+                'linear-gradient(270deg, #FF5733, #FFC300, #DAF7A6, #FF33A6, #FF8C00)',
+              backgroundSize: '400% 400%',
+            }}
           >
+            {displayText}
+            <span className="blinking-cursor">|</span>
+          </div>
+          <div className="mt-6">
+            <a
+              href="/documents/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 text-lg font-medium text-white bg-orange-500 rounded-lg hover:bg-pink-500 transition duration-300"
+            >
+              View Resume
+            </a>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="relative mt-8 md:mt-0 md:w-1/2 flex items-center justify-center"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="w-60 md:w-[500px] h-auto">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/images/profile.png"
+              alt="Prasada Mekala"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover shadow-xl"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* About Section */}
+      <div
+        id="about"
+        className="min-h-screen flex items-center justify-center py-20"
+      >
+        <About />
+      </div>
+
+      {/* Skills Section */}
+      <div
+        id="skills"
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-20"
+        style={{
+          marginBottom: '4rem', // Added margin at the bottom for spacing
+        }}
+      >
+        <Skills />
+      </div>
+
+      {/* Projects Section */}
+      <div
+        id="projects"
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-20"
+        style={{
+          marginTop: '4rem', // Added margin at the top for spacing
+        }}
+      >
+        <Projects />
+      </div>
     </div>
   );
 }
