@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import ContactMe from './components/ContactMe';
+
 
 export default function Home() {
   const words = ['Student', 'Developer', 'Designer'];
@@ -101,8 +103,8 @@ export default function Home() {
             <Image
               src="/images/profile.png"
               alt="Prasada Mekala"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               className="rounded-lg object-cover shadow-xl"
             />
           </div>
@@ -138,6 +140,10 @@ export default function Home() {
       >
         <Projects />
       </div>
+
+      <div id="contact">
+  <ContactMe />
+</div>
     </div>
   );
 }

@@ -8,36 +8,42 @@ const projects = [
     description:
       'A full-stack e-commerce platform that provides a seamless user experience for browsing, adding to cart, and purchasing products. It also features functionalities like user authentication, order tracking, and data management.',
     tags: ['React.js', 'Node.js', 'Express', 'MySQL'],
+    link: 'https://github.com/prasad217/ecommerce_app.git',
   },
   {
     title: 'NLP Text Summarizer',
     description:
       'An AI-powered tool to summarize large amounts of text efficiently, supporting multiple methods for summarization. Built with Flask for backend processing and Google Colab for model training.',
     tags: ['Python', 'Flask', 'NLP', 'Google Colab'],
+    link: 'https://github.com/prasad217/NLP-Based-Text-Summarizer-Web-Application.git',
   },
   {
     title: 'Movie Recommendations',
     description:
       'A recommendation system to suggest movies based on user preferences and viewing history, using cosine similarity and cosine distance for accuracy.',
     tags: ['Python', 'Machine Learning', 'Flask'],
+    link: '#', // Replace with GitHub link if available
   },
   {
     title: 'Waste Management',
     description:
       'A React-based system for route optimization and bin placement, featuring SMS notifications and efficient waste collection powered by OpenRouteService.',
     tags: ['React.js', 'MySQL', 'OpenRouteService'],
+    link: 'https://github.com/prasad217/waste-management.git',
   },
   {
     title: 'Typing Wizard',
     description:
       'A simple typing practice application built with HTML, CSS, and JavaScript to improve typing speed and accuracy.',
     tags: ['HTML', 'CSS', 'JavaScript'],
+    link: 'https://github.com/prasad217/TypeWizardry.git',
   },
   {
     title: 'Deployment Guide',
     description:
       'Step-by-step guides for deploying web applications on platforms like AWS, Vercel, and Kubernetes, using React.js.',
     tags: ['React.js', 'AWS', 'Kubernetes', 'Vercel'],
+    link: 'https://github.com/prasad217/Deployment-Guide.git',
   },
 ];
 
@@ -78,9 +84,14 @@ const Projects = () => {
                 ))}
               </div>
             </div>
-            <button className="mt-auto px-6 py-3 text-lg bg-orange-500 hover:bg-yellow-500 text-white font-semibold rounded transition-colors duration-300">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto px-6 py-3 text-lg bg-orange-500 hover:bg-yellow-500 text-white font-semibold rounded transition-colors duration-300 text-center"
+            >
               View Project
-            </button>
+            </a>
           </motion.div>
         ))}
       </div>
