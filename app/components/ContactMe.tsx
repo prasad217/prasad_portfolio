@@ -17,10 +17,9 @@ const Footer = () => {
         </motion.h2>
         <p className="text-lg text-gray-300 text-center">
           Stay Connected.{' '}
-          <span className="text-white font-semibold">Let's make things happen!</span>
+          <span className="text-white font-semibold">Let&apos;s make things happen!</span>
         </p>
         <div className="flex space-x-6">
-          {/* GitHub */}
           <motion.a
             href="https://github.com/prasad217"
             target="_blank"
@@ -30,7 +29,6 @@ const Footer = () => {
           >
             <FaGithub />
           </motion.a>
-          {/* LinkedIn */}
           <motion.a
             href="https://www.linkedin.com/in/prasad-mani-84b9b5241/"
             target="_blank"
@@ -40,7 +38,6 @@ const Footer = () => {
           >
             <FaLinkedin />
           </motion.a>
-          {/* Email */}
           <motion.a
             href="mailto:prasad.personal217@gmail.com"
             className="text-red-400 text-3xl hover:text-yellow-300 transition duration-300"

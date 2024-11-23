@@ -1,16 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import About from './components/About';
+import About from './components/about';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import ContactMe from './components/ContactMe';
 
-
 export default function Home() {
-  const words = ['Student', 'Developer', 'Designer'];
+  const words = useMemo(() => ['Student', 'Developer', 'Designer'], []);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -124,7 +123,7 @@ export default function Home() {
         id="skills"
         className="min-h-screen flex flex-col items-center justify-center px-6 py-20"
         style={{
-          marginBottom: '4rem', // Added margin at the bottom for spacing
+          marginBottom: '4rem',
         }}
       >
         <Skills />
@@ -135,15 +134,15 @@ export default function Home() {
         id="projects"
         className="min-h-screen flex flex-col items-center justify-center px-6 py-20"
         style={{
-          marginTop: '4rem', // Added margin at the top for spacing
+          marginTop: '4rem',
         }}
       >
         <Projects />
       </div>
 
       <div id="contact">
-  <ContactMe />
-</div>
+        <ContactMe />
+      </div>
     </div>
   );
 }
